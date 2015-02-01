@@ -1,0 +1,227 @@
+*****VERSION 1.1*****
+	+ move function actions from timer.h to a new timer.cpp
+	+ move debugs into if(DEBUG_MODE) statements
+	+ get data files into program
+	+ check for and remove "magic numbers" and "magic strings"
+		-> + application.cpp
+		-> + debug.cpp
+		-> + entity.cpp
+		-> + entityMngr.cpp
+		-> + game.cpp
+		-> + graphics.cpp
+		-> + input.cpp
+		-> + util.cpp
+		-> + winMain.cpp
+	X try to move entityMngr entity types to map? ** STAYING IN STRUCT **
+	+ change BG to give top-down feel
+
+IN ENTITY.CPP
+	IN AVATAR
+	+ change user input to aim at mouse
+	+ move with arrow keys
+	+ move with WASD
+	+ borders of screen enforced (non-scrollable)
+	
+-+ spawner creation	
+	+ spawn in an enemy
+	+ enemy movement
+	
+*****VERSION 1.2.0*****
+	+ change declarations to include var names
+		-> + application.h
+		-> + debug.h
+		-> + entity.h
+		-> + entityMngr.h
+		-> + game.h
+		-> + graphics.h
+		-> + input.h
+		-> + util.h
+
+*****VERSION 1.2.1*****
+	+ seperate entities to two maps
+	+ collision detection cross map ONLY
+
+-+ add bullet to entities //in game.dat, needs entity.h/.cpp
+		-> + Init
+		-> + Update
+		-> + Draw
+		-> + collision
+		-> + spawning by shot
+	
+	+ fire projectile at mouse 
+//TEST//-+ collision detection for bullet//ERROR: Iterator fails with collision//
+
+*****VERSION 1.2.2*****
+	+ change loops to double iterator mode in collision detection //while loop
+						//supports deleting during iteration
+	+ collision detection for bullet
+	+ collision detection for enemies
+	+ MOVE init basics to cEntity and call parent from children.
+		-> + avatar
+		-> + bullet
+		-> + enemy
+	+ change spawning to spawn at edges of level
+	+ increase spawn rate as time goes on
+
+	+ give application an update to check clientrect
+	+ change application.GetWindow[width/height]() to use clientrect
+	
+	+ make resolution size of screen if no resolution specified.
+	
+	//unsure, need more testing//
+-+ use set resolution, make to fit screen (so playable area is constant) //use SetWindowPos(...)
+
+	+ capture message for reacquiring focus of window
+		-> + reactivate keyboard and mouse
+	-> - pause game on losing focus
+	
+	+ FIX COLLISION AREA:
+		-> + have structs get proper collision code 
+		-> X move area for collision detection into var for entities (into entity struct)
+		-> X add scale to collision area detection
+		IN:
+		-> X bullets (check positions of collisions)
+		-> X player (check positions of collisions)
+		-> X enemies (check positions of collisions)
+
+	//WALL COLLISION BREAKING, REVERTING TO OLD SYSTEM//
+	//COLLIDING WITH SELF, TRYING TO DESTRUCT FROM BOTH LISTS//
+	X borders of screen enforced (use objects for collision detection)
+
+	+ collision detection for player 
+		-> + remove enemies and bullets from maps 
+		-> + reset pos and restart
+		-> + reset game time to start spawning from beginning
+		
+	+ collision detection for bullet and screen edge (copy iter system from collision to update)
+	+ add explosions for enemies on death
+		-> + multiple explosions possible to flesh out
+		-> + random rotation per explosion
+		-> + random colors
+		-> + fade explosion by opacity
+		-> + early death to help explosions fade out
+	-> ? change color towards white as explosion dies
+	
+	+ create highscores.dat to hold saved high scores.
+	
+	+ SCORES.CPP
+		-> + read highscores.dat into data file
+		-> + display current score
+	-> ? display high score for this session
+		-> + display overall high score
+		-> + on player death update high score(s) as needed (check overall if score > recentHigh)
+
+	*****VERSION 1.3*****
+- SPAWNER.CPP
+	-> - has list of enemies with each spawn rate
+	-> - has game time which is updated regularly
+	-> - spawn rates are floats based on game time, converted to ints to spawn
+	-> - loops through every enemy type (one function)
+	-> - can accept spawn values for a spawn (special waves)
+	-> - add variance to distance from walls
+
+
+	*****VERSION 1.4*****
+
+	
+
+*****QUESTIONABLE*****
+//? move all gets and sets to .cpp
+//	-> - application.cpp
+//	-> - debug.cpp
+//	-> - entity.cpp
+//	-> - entityMngr.cpp
+//	-> - game.cpp
+//	-> - graphics.cpp
+//	-> - input.cpp
+//	-> - util.cpp
+//	-> - winMain.cpp
+
+//? check spacing in function calls
+//	-> - application.cpp
+//	-> - debug.cpp
+//	-> - entity.cpp
+//	-> - entityMngr.cpp
+//	-> - game.cpp
+//	-> - graphics.cpp
+//	-> - input.cpp
+//	-> - util.cpp
+//	-> - winMain.cpp
+
+//? group enemies by area on screen to manage collision detection checks
+
+//WORKLOAD TO ADD LEVEL HOOKS TOO GREAT//
+//X CREATE level.cpp to hold level(s)
+//	-> X on level creation, reset in game time
+//	-> X border creation inside level
+//	-> ?X on player death, rebuild level
+//- scrollable area
+//	-> - change map creation and drawing to tile map
+	
+//-+ spawner creation
+//	-> - move spawners to own class (spawners getting garbage data in global constants)
+//- enemies spawn at spawners in corners
+//? combine spawners
+
+
+						
+*****TO DO*****	
+- check error trapping/logging
+
+
+
+
+
+
+
+
+***************************************************************************************
+- move pieces of game.dat reading to seperate helpers (look at comp277 lab 4 solution)
+						//TO ALLOW COMMENTS IN DATA
+- if fullscreen mode, reacquire the graphics device (anything in D3DPOOL_DEFAULT)
+//////////////http://stackoverflow.com/questions/972299/best-practices-for-alt-tab-support-in-a-directx-app //////////
+//////////////http://msdn.microsoft.com/en-us/library/bb174714(v=vs.85).aspx //////////
+//////////////http://msdn.microsoft.com/en-us/library/bb174472(v=vs.85).aspx //////////
+***************************************************************************************
+
+//UI STUFF
+- display:
+	-> - time
+	-> - score
+	-> - lives
+- change cursor to crosshair
+
+
+
+
+*****EXTRA MODES*****
+- start screen mode
+- pause screen mode
+- high scores text file and screen
+- move user input to allow for rebindable keys	
+- second enemy
+- level up difficulty
+
+- controller support
+
+*****FINAL STUFF*****
+- remove commented out unneeded code
+	-> - Application h/cpp
+	-> - constants h
+	-> - debug h/cpp
+	-> - entity h/cpp
+	-> - entitymngr h/cpp
+	-> - game h/cpp
+	-> - graphics h/cpp
+	-> - input h/cpp
+	-> - libdec h
+	-> - timer h/cpp
+	-> - util h/cpp
+	-> - winmain cpp
+
+//to add new unit
+	//add in entity list in game.dat
+	//add texture in list in game.dat
+XX	//update entitymngr init list of entities
+	//declare in entity.h as child
+	//define info in entity.cpp

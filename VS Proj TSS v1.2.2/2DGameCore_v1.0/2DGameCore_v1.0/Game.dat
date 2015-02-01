@@ -1,0 +1,64 @@
+Lab10
+1920 1080 false
+
+[BeginFontList]
+scoreFont
+Gungsuh
+24
+[EndFontList]
+
+[BeginSurfaceList]
+Background Space.jpg
+[EndSurfaceList]
+
+[BeginTextureList]
+blueShip blueShip.png
+rock Rock.png
+bullet sphere.png
+wall tempWall.png
+explosion explosion0_1.png
+[EndTextureList]
+
+[BeginEntityList]
+
+Player
+Avatar
+150 0
+62 61
+1 1
+box	
+blueShip
+
+Enemy
+BasicEnemy1
+120 50
+29 27
+1 1
+circle 
+rock
+
+playerBullet
+Bullet
+700 700
+32 34
+0.5 0.5
+circle
+bullet
+
+Wall
+Wall
+0 0
+10 10
+1 1
+box
+wall
+
+Explosion
+Explosion
+0 0
+184 166
+2.0 0.5
+box
+explosion
+
+[EndEntityList]

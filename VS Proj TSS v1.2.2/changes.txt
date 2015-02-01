@@ -1,0 +1,3 @@
+move enemies to a seperate entity map from player (and player's bullets)
+check cross entity list ONLY (player does not collide with own bullets, enemies do not collide with one another)
+both lists hold pointers to walls
